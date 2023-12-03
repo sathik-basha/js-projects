@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validator</title>
+</head>
+<body>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0px 0px 5px -1px #000000da;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      padding-bottom: 10px;
+    }
+    input {
+      width: 300px;
+      height: 30px;
+      padding-left: 10px;
+    }
+    input[type='button'] {
+      padding: 10px 20px;
+      height: inherit;
+      width: inherit;
+      cursor: pointer;
+    }
+    .error {
+      border: 1px solid #FF3333;
+    }
+    .success {
+      border: 1px solid #4BB543;
+    }
+  </style>
+  <form>
+    <h2>Register</h2>
+    
+    <div>
+      <label>Username:</label>
+      <input type="text" id="user_name" name="username" />
+      <span style="display: none; color: #FF3333;" id="user_name_err">Username must be at least 3 characters</span>
+    </div>
+
+    <div>
+      <label>Email:</label>
+      <input type="email" id="email" name="email" />
+      <span style="display: none; color: #FF3333;" id="email_err">Seems, email not valid</span>
+    </div>
+
+    <div>
+      <label>Password:</label>
+      <input type="password" id="password" name="password" />
+      <span style="display: none; color: #FF3333;" id="password_err">Password must be at least 8 charaters</span>
+    </div>
+
+    <div>
+      <label>Confirm Password:</label>
+      <input type="text" id="confirm_password" name="confirm_password"/>
+      <span style="display: none; color: #FF3333;" id="cpassword_err">Password does not match</span>
+    </div>
+
+    <input type="button" value="Submit" id="submit-button"/>
+  </form>
+
+
+  <script>
+    let btnContainer = document.getElementById('submit-button');
+
+    function validUserName() {
+      let userNameContainer  = document.getElementById('user_name');
+      let errorContainer = document.getElementById('user_name_err');
+
+      // resetting the value;
+      errorContainer.style.display = 'none';
+      userNameContainer.classList.remove('error');
+
+      if (userNameContainer.value === '') {
+        userNameContainer.classList.add('error');
+      } else if (userNameContainer.value.length < 3) {
+        errorContainer.style.display = 'block'; 
+        userNameContainer.classList.add('error');
+      } else {
+        userNameContainer.classList.add('success');
+      }
+    }
+
+    function validEmail() {
+      let emailContainer  = document.getElementById('email');
+      let errorContainer = document.getElementById('email_err');
+
+       // resetting the value;
+       errorContainer.style.display = 'none';
+       emailContainer.classList.remove('error');
+
+      if (emailContainer.value === '') {
+        emailContainer.classList.add('error');
+      } else if (!emailContainer.value.includes('@')) {
+        errorContainer.style.display = 'block'; 
+        emailContainer.classList.add('error');
+      } else {
+        emailContainer.classList.add('success');
+      }
+    }
+
+    function validPassword() {
+      let passwordContainer  = document.getElementById('password');
+      let errorContainer = document.getElementById('password_err');
+
+      // resetting the value;
+      errorContainer.style.display = 'none';
+      passwordContainer.classList.remove('error');
+
+      if (passwordContainer.value === '') {
+        passwordContainer.classList.add('error');
+      } else if (passwordContainer.value.length < 8) {
+        errorContainer.style.display = 'block'; 
+        passwordContainer.classList.add('error');
+      } else {
+        passwordContainer.classList.add('success');
+      }
+    }
+
+    function validConfirmPassword() {
+      let cPasswordContainer  = document.getElementById('confirm_password');
+      let passwordContainer = document.getElementById('password');
+      let errorContainer = document.getElementById('cpassword_err');
+
+      // resetting the value;
+      errorContainer.style.display = 'none';
+      passwordContainer.classList.remove('error');
+
+      if (passwordContainer.value === '') {
+        passwordContainer.classList.add('error');
+      } else if (passwordContainer.value !== cPasswordContainer.value) {
+        errorContainer.style.display = 'block'; 
+        passwordContainer.classList.add('error');
+      } else {
+        passwordContainer.classList.add('success');
+      }
+    }
+
+    btnContainer.addEventListener('click', () => {
+      validUserName();
+      validEmail();
+      validPassword();
+      validConfirmPassword();
+    });
+  </script>
+</body>
+</html>
