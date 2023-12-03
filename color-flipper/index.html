@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Flipper</title>
+</head>
+<body>
+  <style>
+    body {
+      background-color: red;
+    }
+    button {
+      border: 2px solid #000;
+      cursor: pointer;
+    }
+  </style>
+  <button>Click here</button>
+
+
+  <script>
+    let btnContainer = document.getElementsByTagName('button')[0];
+    let randomColorsArr = ['red', 'blue', 'green', 'brown'];
+    let index = 1;
+    btnContainer.addEventListener('click', () => {
+      document.getElementsByTagName('body')[0].style.backgroundColor = randomColorsArr[index++];
+    })
+  </script>
+</body>
+</html>
